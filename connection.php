@@ -17,10 +17,11 @@
     function inserir($fase){
         $path = '../database/db.json';
         if (isset($_COOKIE["nome"])) {
+            echo "cookie";
             $json = json_decode(file_get_contents($path),true);
             $json[$fase] = $_COOKIE["nome"];
             file_put_contents($path, json_encode($json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
-            unset($_COOKIE["nome"]);
+            setcookie("nome", "", time() - 3600);
         }
         if (!verificar($fase)) {
             echo "
